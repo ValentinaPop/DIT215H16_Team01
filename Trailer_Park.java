@@ -10,7 +10,7 @@ public class Trailer_Park {
 		Scanner input = new Scanner(System.in) ;
 		Scanner input1 = new Scanner(System.in) ;
 		int choice ;
-		//Pushing is FUN:)
+		//Pushing is FUN :)!
 		try {
 			java.sql.Connection conn = DriverManager.getConnection( "jdbc:mysql://leia.skip.chalmers.se:3306/team_01", "team_01", "yOZGjlGknjwdiG4B" ) ;
 			
