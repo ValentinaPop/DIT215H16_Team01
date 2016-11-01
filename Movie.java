@@ -77,9 +77,6 @@ public class Movie {
 	public void resizeImage(){
 		coverPhoto.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
 	}
-	//private Comment[] comment;
-	//private Actor[] actors;
-	//private Genre[] genre;
 	//public Comment[] getComments(){
 	//	return this.comments;
 	//}
