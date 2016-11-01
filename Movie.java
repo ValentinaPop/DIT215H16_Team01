@@ -6,7 +6,7 @@ public class Movie {
 	private int id;
 	private String title;
 	//private String year;
-	private Image coverPhoto;
+	private ImageIcon coverPhoto;
 	private String runtime;
 	private String language;
 	private Date releaseDate;
@@ -15,11 +15,11 @@ public class Movie {
 	private String director;
 	private String studio;
 	private String ageRestriction;
-	//private Comment[] comment;
+	//private Comment[] comments;
 	//private Actor[] actors;
-	//private Genre[] genre;
+	//private Genre[] genres;
 
-	public Movie(int id, String title, Image coverPhoto, String runtime, String language, Date releaseDate, 
+	public Movie(int id, String title, ImageIcon coverPhoto, String runtime, String language, Date releaseDate, 
 			String description, double averageRate, String director, String studio, String ageRestriction){
 		this.id = id;
 		this.title = title;
@@ -44,7 +44,7 @@ public class Movie {
 		String year = ("" + releaseDate).substring(0, 4);
 		return year;
 	}
-	public Image getcoverPhoto(){
+	public ImageIcon getcoverPhoto(){
 		return coverPhoto;
 	}
 	public String getRuntime(){
@@ -77,5 +77,16 @@ public class Movie {
 	public void resizeImage(){
 		coverPhoto.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
 	}
-	
+	//private Comment[] comment;
+	//private Actor[] actors;
+	//private Genre[] genre;
+	//public Comment[] getComments(){
+	//	return this.comments;
+	//}
+	//public Actor[] getActors(){
+	//	return this.actors;
+	//}
+	//public Genre[] getGenres(){
+	//	return this.genres;
+	//}
 }
