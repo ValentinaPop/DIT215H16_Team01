@@ -300,19 +300,9 @@ public class SecondPage extends JFrame {
 		movieList = new MovieList("The");
 		int length = movieList.getNrOfMovies();
 		int place = 0;
-		int choice = 0;
+		int choice = 0; 
 		movie = movieList.getMovieList().get(choice);
 								
-								/*JButton btnNewButton_2 = new JButton(movie.getTitle());
-								btnNewButton_2.setBounds(0, 205, 1023, 54);
-								internalFrame.getContentPane().add(btnNewButton_2);
-								btnNewButton_2.setFont(new Font("Times New Roman", Font.BOLD, 20));
-								
-								JButton btnNewButton = new JButton(movie.getTitle());
-								btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 20));
-								btnNewButton.setBounds(0, 139, 1023, 54);
-								internalFrame.getContentPane().add(btnNewButton);
-								*/
 								
 								//Go Back Button
 								button = new JButton("<--");
@@ -460,6 +450,18 @@ public class SecondPage extends JFrame {
 				
 				//////////////////// Button actions
 				
+				//Search Button: To Movie List
+				
+				 btnSearch.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							String inputTitle = textField_Title.getText();
+							 movieList = new MovieList(inputTitle);
+							
+							contentPane.remove(internalFrame1);   
+							contentPane.add(internalFrame);
+						}
+					});
+				
 				for(int i = 0; i < length; i++) {
 					
 					JButton[] btnNewButton_1 = new JButton[length];
@@ -471,11 +473,9 @@ public class SecondPage extends JFrame {
 					btnNewButton_1[i].addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							contentPane.remove(internalFrame);
-							contentPane.add(internalFrame1);
-							
+							contentPane.add(internalFrame1);				
 						}
-					});
-					
+					});					
 	
 					place = place + 70;
 					}
@@ -496,7 +496,7 @@ public class SecondPage extends JFrame {
 					}
 				});
 				
-		/*		//From Movie Information to Movie List ELAINE
+				//From Movie Information to Movie List ELAINE
 				button5.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						contentPane.remove(internalFrame1);
@@ -510,7 +510,7 @@ public class SecondPage extends JFrame {
 						contentPane.remove(internalFrame1);
 						contentPane.add(InternalFrame2);
 					} 
-				}); */
+				}); 
 				
 				//From Movie List to Log In
 				button4.addActionListener(new ActionListener() {
@@ -520,42 +520,7 @@ public class SecondPage extends JFrame {
 					}
 				});
 				
-				//Search Button: To Movie List
-			
-				 btnSearch.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {				 
-							contentPane.remove(internalFrame1);
-							contentPane.add(internalFrame);
-						}
-					});
 				
-				//"Movie1" Button: From Movie List to Movie Information + Connection to Database
-			/*	 btnNewButton.addActionListener(new ActionListener() { 
-					 public	void actionPerformed(ActionEvent arg0) {				 
-					contentPane.remove(internalFrame);
-					contentPane.add(internalFrame1);
-				 }
-				 });
-				 
-					
-				//"Movie2" Button: From Movie List to Movie Information + Connection to Database
-				 btnNewButton_1.addActionListener(new ActionListener() {
-					 public void actionPerformed(ActionEvent e) {			 
-							contentPane.remove(internalFrame);
-							contentPane.add(internalFrame1);
-					  } 
-					  
-					  });
-					 
-				//"Movie3" Button: From Movie List to Movie Information + Connection to Database
-				 btnNewButton_2.addActionListener(new ActionListener() {
-					  public void actionPerformed(ActionEvent e) {			 
-							contentPane.remove(internalFrame);
-							contentPane.add(internalFrame1);
-					  } 
-					  
-					  });				 */
-		 
 			}
 	
 }
