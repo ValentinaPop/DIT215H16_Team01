@@ -1,12 +1,14 @@
-package DIT215H16_Team01;
+package connection;
 import java.awt.Image;
 import java.sql.Date;
+
+import javax.swing.ImageIcon;
 
 public class Movie {
 	private int id;
 	private String title;
 	//private String year;
-	private ImageIcon coverPhoto;
+	//private ImageIcon coverPhoto;
 	private String runtime;
 	private String language;
 	private Date releaseDate;
@@ -19,12 +21,11 @@ public class Movie {
 	//private Actor[] actors;
 	//private Genre[] genres;
 
-	public Movie(int id, String title, ImageIcon coverPhoto, String runtime, String language, Date releaseDate, 
+	public Movie(int id, String title, /*ImageIcon coverPhoto,*/ String runtime, String language, Date releaseDate, 
 			String description, double averageRate, String director, String studio, String ageRestriction){
 		this.id = id;
 		this.title = title;
-		//this.year = year;
-		this.coverPhoto = coverPhoto;
+		//this.coverPhoto = coverPhoto;
 		this.runtime = runtime;
 		this.language = language;
 		this.releaseDate = releaseDate;
@@ -40,13 +41,16 @@ public class Movie {
 	public String getTitle(){
 		return title;
 	}
+	//public ImageIcon getCoverPhoto(){
+	//	return this.coverPhoto;
+	//}
 	public String getYear(){
 		String year = ("" + releaseDate).substring(0, 4);
 		return year;
 	}
-	public ImageIcon getcoverPhoto(){
+	/*public ImageIcon getcoverPhoto(){
 		return coverPhoto;
-	}
+	}*/
 	public String getRuntime(){
 		return runtime;
 	}
@@ -59,8 +63,11 @@ public class Movie {
 	public String getDescription(){
 		return description;
 	}
-	public double getAverageRate(){
-		return averageRate;
+	public String getAverageRate(){
+		if (averageRate == 0){
+			return "No votes";
+		}
+		return "" + averageRate;
 	}
 	public String getDirector(){
 		return director;
@@ -72,11 +79,11 @@ public class Movie {
 		return ageRestriction;
 	}
 	public String toString(){
-		return title + " (" + this.getYear() + ") Rate: " + averageRate + "\nRuntime:" + runtime;
+		return title  /* +" (" + this.getYear() + ") Rate: " + averageRate + "\nRuntime:" + runtime*/;
 	}
-	public void resizeImage(){
+	/*public void resizeImage(){
 		coverPhoto.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
-	}
+	}*/
 	//public Comment[] getComments(){
 	//	return this.comments;
 	//}
