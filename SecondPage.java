@@ -297,9 +297,10 @@ public class SecondPage extends JFrame {
 		internalFrame.getContentPane().add(scrollBar);
 		internalFrame.setVisible(true);
 				
-		movieList = new MovieList(5);
+		//movieList = new MovieList(5);
+	//	movieList.getMovieList().get(0).getTitle()
 		
-								JButton btnNewButton_1 = new JButton(movieList.getMovieList().get(0).getTitle());
+								JButton btnNewButton_1 = new JButton("Movie1");
 								btnNewButton_1.setBounds(0, 73, 1023, 54);
 								internalFrame.getContentPane().add(btnNewButton_1);
 								btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 20));
