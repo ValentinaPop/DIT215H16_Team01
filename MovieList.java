@@ -14,24 +14,22 @@ public class MovieList {
 	 private ArrayList<Movie> movieList = new ArrayList<>();
 	 private int nrOfMovies;
 	 
-	 public MovieList(int n){
+	 public MovieList(String n){
 		 try {
 				java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://leia.skip.chalmers.se:3306/team_01", "team_01", "yOZGjlGknjwdiG4B");
 
 				Statement stm = conn.createStatement();
 
-						int id = n;
-
-						ResultSet rs = stm.executeQuery("SELECT * FROM `TrailerPark` WHERE Id REGEXP '[[:<:]]" + id + "[[:>:]]'");
+						ResultSet rs = stm.executeQuery("SELECT * FROM `TrailerPark` WHERE Title REGEXP '[[:<:]]" + n + "[[:>:]]'");
 
 
 						while (rs.next()) {
-							
+							System.out.println(rs.getString("Title"));
 							byte[] image = null;
-				            while(rs.next()) {
+				            
 				                image = rs.getBytes("Picture");
 
-				            }
+				            
 				            //Image img = Toolkit.getDefaultToolkit().createImage(image);
 				            //ImageIcon coverPhoto = new ImageIcon(img);
 							

@@ -27,6 +27,7 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
@@ -112,7 +113,8 @@ public class SecondPage extends JFrame {
 		contentPane.add(panel, BorderLayout.WEST);
 
 		JLabel lblTrailerPark = new JLabel("Trailer Park");
-		lblTrailerPark.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblTrailerPark.setForeground(new Color(128, 0, 0));
+		lblTrailerPark.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 22));
 
 		textField = new JTextField();
 		textField.setColumns(10);
@@ -172,114 +174,112 @@ public class SecondPage extends JFrame {
 		textField_Length = new JTextField();
 		textField_Length.setColumns(10);
 		GroupLayout gl_panel = new GroupLayout(panel);
-		
 		gl_panel.setHorizontalGroup(
-				gl_panel.createParallelGroup(
-						Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel
-								.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
-										.addContainerGap().addGroup(gl_panel
-												.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel
-														.createSequentialGroup()
-														.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-																.addComponent(lblGenre)
-																.addComponent(lblStudio).addComponent(lblRating)
-																.addComponent(lblActor)
-																.addComponent(lblLanguage))
-														.addPreferredGap(ComponentPlacement.RELATED, 45,
-																Short.MAX_VALUE)
-														.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-																.addGroup(gl_panel
-																		.createParallelGroup(Alignment.LEADING, false)
-																		.addComponent(textField_Rating, Alignment.TRAILING)
-																		.addComponent(textField_Actor, Alignment.TRAILING))
-																.addComponent(textField_Language, GroupLayout.PREFERRED_SIZE,
-																		GroupLayout.DEFAULT_SIZE,
-																		GroupLayout.PREFERRED_SIZE)
-																.addComponent(textField_Studio, GroupLayout.PREFERRED_SIZE,
-																		GroupLayout.DEFAULT_SIZE,
-																		GroupLayout.PREFERRED_SIZE)
-																.addComponent(textField_Genre, GroupLayout.PREFERRED_SIZE,
-																		GroupLayout.DEFAULT_SIZE,
-																		GroupLayout.PREFERRED_SIZE)))
-												.addGroup(gl_panel.createSequentialGroup()
-														.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-																.addComponent(lblNewLabel_1).addComponent(lblNewLabel))
-														.addPreferredGap(ComponentPlacement.RELATED, 67,
-																Short.MAX_VALUE)
-														.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-																.addGroup(gl_panel.createSequentialGroup()
-																		.addComponent(textField,
-																				GroupLayout.PREFERRED_SIZE, 0,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addGap(10).addComponent(textField_Title,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE))
-																.addComponent(textField_Year, GroupLayout.PREFERRED_SIZE,
-																		GroupLayout.DEFAULT_SIZE,
-																		GroupLayout.PREFERRED_SIZE)))))
-								.addGroup(gl_panel.createSequentialGroup().addGap(31).addComponent(lblTrailerPark))
-								.addGroup(gl_panel.createSequentialGroup().addContainerGap()
-										.addComponent(lblAgeRestriction).addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(textField_AgeRes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup().addContainerGap().addComponent(lblNewLabel_2)
-										.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-										.addComponent(textField_Director, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup().addContainerGap().addComponent(lblLength)
-										.addPreferredGap(ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-										.addComponent(textField_Length, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE))
-								.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-										.addContainerGap(124, Short.MAX_VALUE).addComponent(btnSearch)))
-								.addContainerGap()));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap().addComponent(lblTrailerPark)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_1).addComponent(textField_Title, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel).addComponent(textField_Year, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblGenre).addComponent(textField_Genre, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblStudio).addComponent(textField_Studio, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblLanguage)
-								.addComponent(textField_Language, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblRating).addComponent(textField_Rating, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblActor).addComponent(textField_Actor, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblAgeRestriction)
-								.addComponent(textField_AgeRes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel_2).addComponent(textField_Director, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblLength).addComponent(
-								textField_Length, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnSearch)
-						.addContainerGap(369, Short.MAX_VALUE)));
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblGenre)
+										.addComponent(lblStudio)
+										.addComponent(lblRating)
+										.addComponent(lblActor)
+										.addComponent(lblLanguage))
+									.addPreferredGap(ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+									.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+											.addComponent(textField_Rating, Alignment.TRAILING)
+											.addComponent(textField_Actor, Alignment.TRAILING))
+										.addComponent(textField_Language, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textField_Studio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textField_Genre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblNewLabel_1)
+										.addComponent(lblNewLabel))
+									.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+									.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+										.addGroup(gl_panel.createSequentialGroup()
+											.addComponent(textField, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE)
+											.addGap(10)
+											.addComponent(textField_Title, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addComponent(textField_Year, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblAgeRestriction)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(textField_AgeRes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel_2)
+							.addPreferredGap(ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+							.addComponent(textField_Director, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblLength)
+							.addPreferredGap(ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+							.addComponent(textField_Length, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addContainerGap(158, Short.MAX_VALUE)
+							.addComponent(btnSearch))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(43)
+							.addComponent(lblTrailerPark)))
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblTrailerPark)
+					.addGap(13)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_1)
+						.addComponent(textField_Title, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel)
+						.addComponent(textField_Year, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblGenre)
+						.addComponent(textField_Genre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblStudio)
+						.addComponent(textField_Studio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblLanguage)
+						.addComponent(textField_Language, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblRating)
+						.addComponent(textField_Rating, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblActor)
+						.addComponent(textField_Actor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblAgeRestriction)
+						.addComponent(textField_AgeRes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_2)
+						.addComponent(textField_Director, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblLength)
+						.addComponent(textField_Length, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnSearch)
+					.addContainerGap(643, Short.MAX_VALUE))
+		);
 		panel.setLayout(gl_panel);
 
 		
@@ -297,24 +297,22 @@ public class SecondPage extends JFrame {
 		internalFrame.getContentPane().add(scrollBar);
 		internalFrame.setVisible(true);
 				
-		//movieList = new MovieList(5);
-	//	movieList.getMovieList().get(0).getTitle()
-		
-								JButton btnNewButton_1 = new JButton("Movie1");
-								btnNewButton_1.setBounds(0, 73, 1023, 54);
-								internalFrame.getContentPane().add(btnNewButton_1);
-								btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 20));
-				
-								JButton btnNewButton_2 = new JButton("Movie3");
+		movieList = new MovieList("The");
+		int length = movieList.getNrOfMovies();
+		int place = 0;
+		int choice = 0;
+		movie = movieList.getMovieList().get(choice);
+								
+								/*JButton btnNewButton_2 = new JButton(movie.getTitle());
 								btnNewButton_2.setBounds(0, 205, 1023, 54);
 								internalFrame.getContentPane().add(btnNewButton_2);
 								btnNewButton_2.setFont(new Font("Times New Roman", Font.BOLD, 20));
 								
-								JButton btnNewButton = new JButton("Movie 1");
+								JButton btnNewButton = new JButton(movie.getTitle());
 								btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 20));
 								btnNewButton.setBounds(0, 139, 1023, 54);
 								internalFrame.getContentPane().add(btnNewButton);
-								
+								*/
 								
 								//Go Back Button
 								button = new JButton("<--");
@@ -336,25 +334,25 @@ public class SecondPage extends JFrame {
 				internalFrame1.getContentPane().setLayout(null);
 				internalFrame1.setVisible(true);
 				
-				/*photoLabel = new JLabel("");
-				photoLabel.setIcon(movie.getCoverPhoto());
+				photoLabel = new JLabel("");
+				photoLabel.setIcon(new ImageIcon("C:\\Users\\Omistaja\\Downloads\\TrailerPark\\14886335_1153238338097728_590646191_n.png"));
 				photoLabel.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
 				photoLabel.setBackground(new Color(128, 0, 0));
 				photoLabel.setBounds(27, 76, 211, 273);
-				getContentPane().add(photoLabel);*/
+				internalFrame1.getContentPane().add(photoLabel);
 				
 				
 				JLabel titleLabel = new JLabel(movie.getTitle());
 				titleLabel.setForeground(new Color(128, 0, 0));
 				titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
 				titleLabel.setBounds(271, 33, 380, 44);
-				getContentPane().add(titleLabel);
+				internalFrame1.add(titleLabel);
 				
 				JPanel infoPanel = new JPanel();
 				infoPanel.setBackground(new Color(253, 253, 253));
 				infoPanel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(128,0,0), null, new Color(128, 0, 0), null));
 				infoPanel.setBounds(258, 75, 403, 139);
-				getContentPane().add(infoPanel);
+				internalFrame1.add(infoPanel);
 				infoPanel.setLayout(null);
 				
 				JLabel releaseDateLabel = new JLabel(" Release date:  " + movie.getReleaseDate());
@@ -404,14 +402,14 @@ public class SecondPage extends JFrame {
 				lblBack.setFont(new Font("Times New Roman", Font.BOLD, 14));
 				lblBack.setBackground(new Color(128,0,0));
 				lblBack.setBounds(610, 33, 44, 16);
-				getContentPane().add(lblBack);
+				internalFrame1.add(lblBack);
 				
 				JLabel lblRate = new JLabel("Rate: " + movie.getAverageRate());
 				lblRate.setForeground(Color.ORANGE);
 				lblRate.setHorizontalAlignment(SwingConstants.CENTER);
 				lblRate.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 				lblRate.setBounds(27, 362, 211, 33);
-				getContentPane().add(lblRate);
+				internalFrame1.add(lblRate);
 				
 				JTextArea txtDescription = new JTextArea();
 				txtDescription.setForeground(new Color(128,0,0));
@@ -421,7 +419,7 @@ public class SecondPage extends JFrame {
 				txtDescription.setLineWrap(true);
 				txtDescription.setText(movie.getDescription());
 				txtDescription.setBounds(258, 212, 403, 169);
-				getContentPane().add(txtDescription);
+				internalFrame1.add(txtDescription);
 				
 				//This was a JLabel
 				button5 = new JButton("Back");
@@ -434,7 +432,7 @@ public class SecondPage extends JFrame {
 				//Added to be able to get to Log in
 				button3 = new JButton("Log In");
 				button3.setBounds(24, 13, 97, 25);
-				internalFrame1.getContentPane().add(button3);
+				internalFrame1.add(button3); 
 			
 				
 				///////////////////// InternalFrame2: Log In
@@ -462,6 +460,26 @@ public class SecondPage extends JFrame {
 				
 				//////////////////// Button actions
 				
+				for(int i = 0; i < length; i++) {
+					
+					JButton[] btnNewButton_1 = new JButton[length];
+					btnNewButton_1[i] = new JButton(movieList.getMovieList().get(i).toString());
+					btnNewButton_1[i].setBounds(5, 73 + place, 1000, 54);
+					internalFrame.getContentPane().add(btnNewButton_1[i]);
+					btnNewButton_1[i].setFont(new Font("Times New Roman", Font.BOLD, 20));
+					
+					btnNewButton_1[i].addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							contentPane.remove(internalFrame);
+							contentPane.add(internalFrame1);
+							
+						}
+					});
+					
+	
+					place = place + 70;
+					}
+				
 				// From Log In To Movie List
 				button2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -478,21 +496,21 @@ public class SecondPage extends JFrame {
 					}
 				});
 				
-				//From Movie Information to Movie List ELAINE
+		/*		//From Movie Information to Movie List ELAINE
 				button5.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						contentPane.remove(internalFrame1);
 						contentPane.add(internalFrame);
 					}
-				});
+				}); 
 				
 				//From Movie Information to Log In
 				button3.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						contentPane.remove(internalFrame1);
 						contentPane.add(InternalFrame2);
-					}
-				});
+					} 
+				}); */
 				
 				//From Movie List to Log In
 				button4.addActionListener(new ActionListener() {
@@ -512,7 +530,7 @@ public class SecondPage extends JFrame {
 					});
 				
 				//"Movie1" Button: From Movie List to Movie Information + Connection to Database
-				 btnNewButton.addActionListener(new ActionListener() { 
+			/*	 btnNewButton.addActionListener(new ActionListener() { 
 					 public	void actionPerformed(ActionEvent arg0) {				 
 					contentPane.remove(internalFrame);
 					contentPane.add(internalFrame1);
@@ -536,7 +554,7 @@ public class SecondPage extends JFrame {
 							contentPane.add(internalFrame1);
 					  } 
 					  
-					  });				 
+					  });				 */
 		 
 			}
 	
