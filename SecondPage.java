@@ -12,6 +12,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.SoftBevelBorder;
+import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
@@ -25,16 +26,22 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class SecondPage extends JFrame {
-	MovieList movieList;
-	Movie movie;
+	MovieList movieList = new MovieList();
+	Movie movie = new Movie();
 	private JPanel contentPane;
 	private JTextField textField;
 	private JLabel lblNewLabel;
@@ -296,12 +303,7 @@ public class SecondPage extends JFrame {
 		scrollBar.setBounds(1008, 54, 15, 714);
 		internalFrame.getContentPane().add(scrollBar);
 		internalFrame.setVisible(true);
-				
-		movieList = new MovieList("The");
-		int length = movieList.getNrOfMovies();
-		int place = 0;
-		int choice = 0; 
-		movie = movieList.getMovieList().get(choice);
+		
 								
 								
 								//Go Back Button
@@ -315,8 +317,6 @@ public class SecondPage extends JFrame {
 								internalFrame.getContentPane().add(button4);
 								
 				
-
-				
 				/////////////////////Information of the movie Elaine
 							
 				JInternalFrame internalFrame1 = new JInternalFrame("New JInternalFrame");
@@ -325,27 +325,37 @@ public class SecondPage extends JFrame {
 				internalFrame1.setVisible(true);
 				
 				photoLabel = new JLabel("");
-				photoLabel.setIcon(new ImageIcon("C:\\Users\\Omistaja\\Downloads\\TrailerPark\\14886335_1153238338097728_590646191_n.png"));
+				BufferedImage img=null;
+				File file = new File("C:\\Users\\Omistaja\\Downloads\\TrailerPark\\14886335_1153238338097728_590646191_n.png");
+				try {
+					img = ImageIO.read(file);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
 				photoLabel.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
 				photoLabel.setBackground(new Color(128, 0, 0));
 				photoLabel.setBounds(27, 76, 211, 273);
 				internalFrame1.getContentPane().add(photoLabel);
+				ImageIcon imgicn = new ImageIcon(img.getScaledInstance(photoLabel.getWidth(), photoLabel.getHeight(), 0));
+				photoLabel.setIcon(imgicn);
 				
 				
 				JLabel titleLabel = new JLabel(movie.getTitle());
 				titleLabel.setForeground(new Color(128, 0, 0));
 				titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
 				titleLabel.setBounds(271, 33, 380, 44);
-				internalFrame1.add(titleLabel);
+				internalFrame1.getContentPane().add(titleLabel);
 				
 				JPanel infoPanel = new JPanel();
 				infoPanel.setBackground(new Color(253, 253, 253));
 				infoPanel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(128,0,0), null, new Color(128, 0, 0), null));
 				infoPanel.setBounds(258, 75, 403, 139);
-				internalFrame1.add(infoPanel);
+				internalFrame1.getContentPane().add(infoPanel);
 				infoPanel.setLayout(null);
 				
-				JLabel releaseDateLabel = new JLabel(" Release date:  " + movie.getReleaseDate());
+				JLabel releaseDateLabel = new JLabel(" Release date:  " + movie.getYear());
 				releaseDateLabel.setForeground(new Color(0, 0, 0));
 				releaseDateLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 14));
 				releaseDateLabel.setBounds(207, 62, 196, 29);
@@ -392,14 +402,14 @@ public class SecondPage extends JFrame {
 				lblBack.setFont(new Font("Times New Roman", Font.BOLD, 14));
 				lblBack.setBackground(new Color(128,0,0));
 				lblBack.setBounds(610, 33, 44, 16);
-				internalFrame1.add(lblBack);
+				internalFrame1.getContentPane().add(lblBack);
 				
 				JLabel lblRate = new JLabel("Rate: " + movie.getAverageRate());
 				lblRate.setForeground(Color.ORANGE);
 				lblRate.setHorizontalAlignment(SwingConstants.CENTER);
 				lblRate.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 				lblRate.setBounds(27, 362, 211, 33);
-				internalFrame1.add(lblRate);
+				internalFrame1.getContentPane().add(lblRate);
 				
 				JTextArea txtDescription = new JTextArea();
 				txtDescription.setForeground(new Color(128,0,0));
@@ -409,7 +419,7 @@ public class SecondPage extends JFrame {
 				txtDescription.setLineWrap(true);
 				txtDescription.setText(movie.getDescription());
 				txtDescription.setBounds(258, 212, 403, 169);
-				internalFrame1.add(txtDescription);
+				internalFrame1.getContentPane().add(txtDescription);
 				
 				//This was a JLabel
 				button5 = new JButton("Back");
@@ -417,12 +427,12 @@ public class SecondPage extends JFrame {
 				button5.setFont(new Font("Times New Roman", Font.BOLD, 10));
 				button5.setBackground(new Color(128,0,0));
 				button5.setBounds(610, 33, 60, 25);
-				internalFrame1.add(button5);
+				internalFrame1.getContentPane().add(button5);
 				
 				//Added to be able to get to Log in
 				button3 = new JButton("Log In");
 				button3.setBounds(24, 13, 97, 25);
-				internalFrame1.add(button3); 
+				internalFrame1.getContentPane().add(button3); 
 			
 				
 				///////////////////// InternalFrame2: Log In
@@ -454,14 +464,61 @@ public class SecondPage extends JFrame {
 				
 				 btnSearch.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							String inputTitle = textField_Title.getText();
-							 movieList = new MovieList(inputTitle);
+						
+							//TODO
+							// Movielist ei tyhjene kun etsii uudestaan
 							
+							
+							ArrayList<Movie> movieListed = new ArrayList<>(); 
+							movieListed.clear();			//Makes movieListed empty
+							MovieList.movieList.clear(); 	//Makes movieList empty after first search
+							MovieList.nrOfMovies = 0; 		//Makes nrOfMovies
+							
+							//Getting the User input from Text Fields
+							String inputTitle = textField_Title.getText(); //textField_Title.getText();
+							int inputYear = Integer.parseInt(0 + textField_Year.getText()); //there is "0 +" because cannot change nothing to integer
+							String inputGenre = textField_Genre.getText();
+							String inputStudio = textField_Studio.getText();
+							String inputLanguage = textField_Language.getText();//textField_Language.getText();
+							double inputRating = 0; //Integer.parseInt(textField_Rating.getText());
+							String intputActor = textField_Actor.getText();
+							String inputAgerestriction =  textField_AgeRes.getText();
+							String inputDirector = textField_Director.getText();
+							String inputRuntime = textField_Length.getText();;
+							
+							// Using the user input for searching movies
+							Movie input = new Movie(0, inputTitle, inputRuntime, inputLanguage, inputYear, null, inputRating, inputDirector, inputStudio, inputAgerestriction /*, inputGenre, intputActor*/);
+							movieListed = movieList.setMovieList(input); 
+							
+							//Creating Buttons for List of movies
+							int place = 0; // place so that buttons are not on each others
+							for(int i = 0; i < movieListed.size(); i++) {
+								
+								JButton[] btnNewButton_1 = new JButton[movieListed.size()];
+								btnNewButton_1[i] = new JButton(movieListed.get(i).toString());
+								btnNewButton_1[i].setBounds(5, 73 + place, 1000, 54);
+								internalFrame.getContentPane().add(btnNewButton_1[i]);
+								btnNewButton_1[i].setFont(new Font("Times New Roman", Font.BOLD, 20));
+								
+								btnNewButton_1[i].addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										contentPane.remove(internalFrame);
+										contentPane.add(internalFrame1);				
+									}
+								});					
+				
+								place = place + 70;
+								}
+		
 							contentPane.remove(internalFrame1);   
-							contentPane.add(internalFrame);
+							contentPane.add(internalFrame);						
+							
 						}
 					});
-				
+				 
+				 	int length = 0;
+					int place = 0;
+					
 				for(int i = 0; i < length; i++) {
 					
 					JButton[] btnNewButton_1 = new JButton[length];
@@ -522,5 +579,4 @@ public class SecondPage extends JFrame {
 				
 				
 			}
-	
 }

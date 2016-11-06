@@ -11,7 +11,7 @@ public class Movie {
 	//private ImageIcon coverPhoto;
 	private String runtime;
 	private String language;
-	private Date releaseDate;
+	private int year;
 	private String description;
 	private double averageRate;
 	private String director;
@@ -20,15 +20,45 @@ public class Movie {
 	//private Comment[] comments;
 	//private Actor[] actors;
 	//private Genre[] genres;
+	
+	
+	//Default constructer
+	public Movie(){
+		this.id = 0;
+		this.title = "";
+		//this.coverPhoto = coverPhoto;
+		this.runtime = "";
+		this.language = "";
+		this.year = 0;
+		this.description = "";
+		this.averageRate = 0;
+		this.director = "";
+		this.studio = "";
+		this.ageRestriction = "";
+	}
+	
+	//Constructer with title for "No mocies found"
+	public Movie(String title){
+		this.title = title;
+		//this.coverPhoto = coverPhoto;
+		this.runtime = "";
+		this.language = language;
+		this.year = 0;
+		this.description = "";
+		this.averageRate = 0;
+		this.director = "";
+		this.studio = "";
+		this.ageRestriction = "";
+	}
 
-	public Movie(int id, String title, /*ImageIcon coverPhoto,*/ String runtime, String language, Date releaseDate, 
+	public Movie(int id, String title, /*ImageIcon coverPhoto,*/ String runtime, String language, int year, 
 			String description, double averageRate, String director, String studio, String ageRestriction){
 		this.id = id;
 		this.title = title;
 		//this.coverPhoto = coverPhoto;
 		this.runtime = runtime;
 		this.language = language;
-		this.releaseDate = releaseDate;
+		this.year = year;
 		this.description = description;
 		this.averageRate = averageRate;
 		this.director = director;
@@ -41,13 +71,11 @@ public class Movie {
 	public String getTitle(){
 		return title;
 	}
+	
 	//public ImageIcon getCoverPhoto(){
 	//	return this.coverPhoto;
 	//}
-	public String getYear(){
-		String year = ("" + releaseDate).substring(0, 4);
-		return year;
-	}
+	
 	/*public ImageIcon getcoverPhoto(){
 		return coverPhoto;
 	}*/
@@ -57,17 +85,14 @@ public class Movie {
 	public String getLanguage(){
 		return language;
 	}
-	public Date getReleaseDate(){
-		return releaseDate;
+	public int getYear(){
+		return year;
 	}
 	public String getDescription(){
 		return description;
 	}
-	public String getAverageRate(){
-		if (averageRate == 0){
-			return "No votes";
-		}
-		return "" + averageRate;
+	public double getAverageRate(){
+		return averageRate;
 	}
 	public String getDirector(){
 		return director;
@@ -79,7 +104,7 @@ public class Movie {
 		return ageRestriction;
 	}
 	public String toString(){
-		return title  /* +" (" + this.getYear() + ") Rate: " + averageRate + "\nRuntime:" + runtime*/;
+		return title    /* Rate: + averageRate + "\nRuntime:" + runtime*/;
 	}
 	/*public void resizeImage(){
 		coverPhoto.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
