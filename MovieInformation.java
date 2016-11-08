@@ -1,4 +1,4 @@
-package DIT215H16_Team01;
+package connection;
 
 import java.awt.EventQueue;
 import java.sql.DriverManager;
@@ -43,59 +43,9 @@ public class MovieInformation extends JInternalFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		Movie movie;
-		Scanner input = new Scanner(System.in) ;
-		ImageIcon coverPhoto;
-		
-		try {
-			java.sql.Connection conn = DriverManager.getConnection( "jdbc:mysql://leia.skip.chalmers.se:3306/team_01", "team_01", "yOZGjlGknjwdiG4B" ) ;
-			
-			Statement stm = conn.createStatement() ;
-				
-					
-					System.out.print( "Enter the Title: " ) ;
-					String title = input.nextLine() ;
-					
-					ResultSet rs = stm.executeQuery( "SELECT * FROM `TrailerPark` WHERE title REGEXP '[[:<:]]" + title + "[[:>:]]'" ) ;
-					
-					while ( rs.next() ) {
-						//coverPhoto
-						
-						byte[] image = null;
-			            while(rs.next()) {
-			                image = rs.getBytes("Picture");
-
-			            }
-			            Image img = Toolkit.getDefaultToolkit().createImage(image);
-			            coverPhoto = new ImageIcon(img);
-						
-						//movie = new Movie(rs.getInt("Id"), rs.getString("Title"), coverPhoto, rs.getString("Length"), rs.getString("Language"),
-						//		rs.getDate("Release"), rs.getString("Description of the movie"), rs.getDouble("Rate"),rs.getString("Director"),
-						//		rs.getString("Studio"), rs.getString("Age restriction") );
-					}
-				
-		} 		
-		catch ( Exception ex ) {
-			ex.printStackTrace() ;
-		} 
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MovieInformation frame = new MovieInformation();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public MovieInformation() {
+		
 		getContentPane().setBackground(new Color(253, 253, 253));
 		setBounds(100, 100, 700, 500);
 		getContentPane().setLayout(null);
@@ -166,7 +116,7 @@ public class MovieInformation extends JInternalFrame {
 		lblBack.setForeground(Color.BLACK);
 		lblBack.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		lblBack.setBackground(new Color(128,0,0));
-		lblBack.setBounds(610, 33, 44, 16);
+		lblBack.setBounds(590, 33, 64, 25);
 		getContentPane().add(lblBack);
 		
 		JLabel lblRate = new JLabel("Rate: No votes");

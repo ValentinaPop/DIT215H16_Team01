@@ -32,15 +32,18 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SecondPage extends JFrame {
-	MovieList movieList = new MovieList();
+	
 	Movie movie = new Movie();
 	private JPanel contentPane;
 	private JTextField textField;
@@ -66,19 +69,7 @@ public class SecondPage extends JFrame {
 	private JTextField textField_Length;
 	
 	
-	private JFrame frame;
-	private JLabel lblMessageMovie1;
-	private JLabel lblMessageMovie2;
-	private JLabel lblMessageMovie3;
-	private JLabel photoLabel;
-	private JTextField txtReady;
-	private JTextField txtReady_1;
 	private JButton button;
-	private JButton button1;
-	private JButton button2;
-	private JButton button3;
-	private JButton button4;
-	private JButton button5;
 
 	/**
 	 * Launch the application.
@@ -291,192 +282,23 @@ public class SecondPage extends JFrame {
 
 		
 		
-		/////////////////////// Internal Frame: List Of Movies
+				/////////////////////// Internal Frame: List Of Movies
 		
-		JInternalFrame internalFrame = new JInternalFrame("JInternalFrame");
-		internalFrame.setBorder(null);
-		contentPane.add(internalFrame, BorderLayout.CENTER);
-		internalFrame.getContentPane().setLayout(null);
-		
-
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(1008, 54, 15, 714);
-		internalFrame.getContentPane().add(scrollBar);
-		internalFrame.setVisible(true);
-		
-								
-								
-								//Go Back Button
-								button = new JButton("<--");
-								button.setBounds(29, 28, 97, 25);
-								internalFrame.getContentPane().add(button);
-								
-								//Log In Button
-								button4 = new JButton("Log in");
-								button4.setBounds(854, 35, 97, 25);
-								internalFrame.getContentPane().add(button4);
-								
-				
-				/////////////////////Information of the movie Elaine
-							
-				JInternalFrame internalFrame1 = new JInternalFrame("New JInternalFrame");
-				internalFrame1.setBorder(null);
-				internalFrame1.getContentPane().setLayout(null);
-				internalFrame1.setVisible(true);
-				
-				photoLabel = new JLabel("");
-				BufferedImage img=null;
-				File file = new File("C:\\Users\\Omistaja\\Downloads\\TrailerPark\\14886335_1153238338097728_590646191_n.png");
-				try {
-					img = ImageIO.read(file);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-				photoLabel.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
-				photoLabel.setBackground(new Color(128, 0, 0));
-				photoLabel.setBounds(27, 76, 211, 273);
-				internalFrame1.getContentPane().add(photoLabel);
-				ImageIcon imgicn = new ImageIcon(img.getScaledInstance(photoLabel.getWidth(), photoLabel.getHeight(), 0));
-				photoLabel.setIcon(imgicn);
-				
-				
-				JLabel titleLabel = new JLabel(movie.getTitle());
-				titleLabel.setForeground(new Color(128, 0, 0));
-				titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
-				titleLabel.setBounds(271, 33, 380, 44);
-				internalFrame1.getContentPane().add(titleLabel);
-				
-				JPanel infoPanel = new JPanel();
-				infoPanel.setBackground(new Color(253, 253, 253));
-				infoPanel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(128,0,0), null, new Color(128, 0, 0), null));
-				infoPanel.setBounds(258, 75, 403, 139);
-				internalFrame1.getContentPane().add(infoPanel);
-				infoPanel.setLayout(null);
-				
-				JLabel releaseDateLabel = new JLabel(" Release date:  " + movie.getYear());
-				releaseDateLabel.setForeground(new Color(0, 0, 0));
-				releaseDateLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 14));
-				releaseDateLabel.setBounds(207, 62, 196, 29);
-				infoPanel.add(releaseDateLabel);
-				
-				JLabel runtimeLabel = new JLabel(" Runtime:  " + movie.getRuntime());
-				runtimeLabel.setForeground(new Color(0, 0, 0));
-				runtimeLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 14));
-				runtimeLabel.setBounds(0, 0, 155, 29);
-				infoPanel.add(runtimeLabel);
-				
-				JLabel ageLabel = new JLabel(" Age restriction:  " + movie.getAgeRestriction());
-				ageLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 14));
-				ageLabel.setBounds(0, 62, 155, 29);
-				infoPanel.add(ageLabel);
-				
-				JLabel languageLabel = new JLabel(" Language:  " + movie.getLanguage());
-				languageLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 14));
-				languageLabel.setBounds(0, 30, 155, 29);
-				infoPanel.add(languageLabel);
-				
-				JLabel lblStudioDisney = new JLabel(" Studio: " + movie.getStudio());
-				lblStudioDisney.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 14));
-				lblStudioDisney.setBounds(207, 30, 167, 29);
-				infoPanel.add(lblStudioDisney);
-				
-				JLabel lblDirectorStevenSpielberg = new JLabel(" Director: " + movie.getDirector());
-				lblDirectorStevenSpielberg.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 14));
-				lblDirectorStevenSpielberg.setBounds(207, 0, 167, 29);
-				infoPanel.add(lblDirectorStevenSpielberg);
-				
-				JLabel lblStarringNamesOf = new JLabel(" Starring: Names of around three actors I think. ");
-				lblStarringNamesOf.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 14));
-				lblStarringNamesOf.setBounds(0, 93, 403, 22);
-				infoPanel.add(lblStarringNamesOf);
-				
-				JLabel lblGenreAdventureComedy = new JLabel(" Genre:  Adventure, Comedy, Family");
-				lblGenreAdventureComedy.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 14));
-				lblGenreAdventureComedy.setBounds(0, 110, 403, 29);
-				infoPanel.add(lblGenreAdventureComedy);
-				
-				JLabel lblBack = new JLabel("Back");
-				lblBack.setForeground(Color.BLACK);
-				lblBack.setFont(new Font("Times New Roman", Font.BOLD, 14));
-				lblBack.setBackground(new Color(128,0,0));
-				lblBack.setBounds(610, 33, 44, 16);
-				internalFrame1.getContentPane().add(lblBack);
-				
-				JLabel lblRate = new JLabel("Rate: " + movie.getAverageRate());
-				lblRate.setForeground(Color.ORANGE);
-				lblRate.setHorizontalAlignment(SwingConstants.CENTER);
-				lblRate.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-				lblRate.setBounds(27, 362, 211, 33);
-				internalFrame1.getContentPane().add(lblRate);
-				
-				JTextArea txtDescription = new JTextArea();
-				txtDescription.setForeground(new Color(128,0,0));
-				txtDescription.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-				txtDescription.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-				txtDescription.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, new Color(128,0,0), null));
-				txtDescription.setLineWrap(true);
-				txtDescription.setText(movie.getDescription());
-				txtDescription.setBounds(258, 212, 403, 169);
-				internalFrame1.getContentPane().add(txtDescription);
-				
-				//This was a JLabel
-				button5 = new JButton("Back");
-				button5.setForeground(Color.BLACK);
-				button5.setFont(new Font("Times New Roman", Font.BOLD, 10));
-				button5.setBackground(new Color(128,0,0));
-				button5.setBounds(610, 33, 60, 25);
-				internalFrame1.getContentPane().add(button5);
-				
-				//Added to be able to get to Log in
-				button3 = new JButton("Log In");
-				button3.setBounds(24, 13, 97, 25);
-				internalFrame1.getContentPane().add(button3); 
+				MovieListed movieListed = new MovieListed();
 			
-				
 				///////////////////// InternalFrame2: Log In
 				
-				JInternalFrame InternalFrame2 = new JInternalFrame("JJInternalFrame");
-				InternalFrame2.setBorder(null);
-				InternalFrame2.getContentPane().setLayout(null);
-		
-				JScrollBar scrollBar3 = new JScrollBar();
-				scrollBar3.setBounds(1008, 54, 15, 714);
-				InternalFrame2.getContentPane().add(scrollBar3);
-				InternalFrame2.setVisible(true);
-
-				// Text field
-				JTextPane textPane1 = new JTextPane();
-				textPane1.setText("Logging in!");
-				textPane1.setBounds(0, 60, 1023, 391);
-				InternalFrame2.getContentPane().add(textPane1);
-				
-				// Going to Movies button
-				button2 = new JButton("Movies");
-				button2.setBounds(24, 13, 97, 25);
-				InternalFrame2.getContentPane().add(button2);
-				
+				Login login = new Login();
 				
 				//////////////////// Button actions
 				
 				//Search Button: To Movie List
-				
 				 btnSearch.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-						
-							//TODO
-							// Movielist ei tyhjene kun etsii uudestaan
-							
-							
-							ArrayList<Movie> movieListed = new ArrayList<>(); 
-							movieListed.clear();			//Makes movieListed empty
-							MovieList.movieList.clear(); 	//Makes movieList empty after first search
-							MovieList.nrOfMovies = 0; 		//Makes nrOfMovies
-							
+										
 							//Getting the User input from Text Fields
 							String inputTitle = textField_Title.getText(); //textField_Title.getText();
-							int inputYear = Integer.parseInt(0 + textField_Year.getText()); //there is "0 +" because cannot change nothing to integer
+							String inputYear = "2000"; //Integer.parseInt(0 + textField_Year.getText()); //there is "0 +" because cannot change nothing to integer
 							String inputGenre = textField_Genre.getText();
 							String inputStudio = textField_Studio.getText();
 							String inputLanguage = textField_Language.getText();//textField_Language.getText();
@@ -487,96 +309,12 @@ public class SecondPage extends JFrame {
 							String inputRuntime = textField_Length.getText();;
 							
 							// Using the user input for searching movies
-							Movie input = new Movie(0, inputTitle, inputRuntime, inputLanguage, inputYear, null, inputRating, inputDirector, inputStudio, inputAgerestriction /*, inputGenre, intputActor*/);
-							movieListed = movieList.setMovieList(input); 
+							Movie input = new Movie(0, inputTitle, inputRuntime, inputLanguage, inputYear, inputRating, inputDirector, inputStudio, inputAgerestriction /*, inputGenre, intputActor*/);
+						
+							//connecting to DBConnection and SearchQuery
 							
-							//Creating Buttons for List of movies
-							int place = 0; // place so that buttons are not on each others
-							for(int i = 0; i < movieListed.size(); i++) {
-								
-								JButton[] btnNewButton_1 = new JButton[movieListed.size()];
-								btnNewButton_1[i] = new JButton(movieListed.get(i).toString());
-								btnNewButton_1[i].setBounds(5, 73 + place, 1000, 54);
-								internalFrame.getContentPane().add(btnNewButton_1[i]);
-								btnNewButton_1[i].setFont(new Font("Times New Roman", Font.BOLD, 20));
-								
-								btnNewButton_1[i].addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent e) {
-										contentPane.remove(internalFrame);
-										contentPane.add(internalFrame1);				
-									}
-								});					
-				
-								place = place + 70;
-								}
-		
-							contentPane.remove(internalFrame1);   
-							contentPane.add(internalFrame);						
-							
-						}
+						}				 
 					});
-				 
-				 	int length = 0;
-					int place = 0;
-					
-				for(int i = 0; i < length; i++) {
-					
-					JButton[] btnNewButton_1 = new JButton[length];
-					btnNewButton_1[i] = new JButton(movieList.getMovieList().get(i).toString());
-					btnNewButton_1[i].setBounds(5, 73 + place, 1000, 54);
-					internalFrame.getContentPane().add(btnNewButton_1[i]);
-					btnNewButton_1[i].setFont(new Font("Times New Roman", Font.BOLD, 20));
-					
-					btnNewButton_1[i].addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							contentPane.remove(internalFrame);
-							contentPane.add(internalFrame1);				
-						}
-					});					
-	
-					place = place + 70;
-					}
 				
-				// From Log In To Movie List
-				button2.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					contentPane.remove(InternalFrame2);
-					contentPane.add(internalFrame);
-				}
-			});
-				
-				// From List to Previous Movie??
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {					 
-						contentPane.remove(internalFrame);
-						contentPane.add(internalFrame1);
-					}
-				});
-				
-				//From Movie Information to Movie List ELAINE
-				button5.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						contentPane.remove(internalFrame1);
-						contentPane.add(internalFrame);
-					}
-				}); 
-				
-				//From Movie Information to Log In
-				button3.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						contentPane.remove(internalFrame1);
-						contentPane.add(InternalFrame2);
-					} 
-				}); 
-				
-				//From Movie List to Log In
-				button4.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						contentPane.remove(internalFrame);
-						contentPane.add(InternalFrame2);
-					}
-				});
-				
-				
-			}
+				 }
 }
