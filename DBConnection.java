@@ -31,7 +31,7 @@ public class DBConnection {
 							while ( rs.next() ) {
 						user = (new User(rs.getInt("USER_ID"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("EMAIL"),rs.getBoolean("ADMINISTRATOR")));		
 							}
-						}
+						} 
 						else if(type.equals("Movie")){
 							while ( rs.next() ) {
 								
@@ -67,7 +67,7 @@ public class DBConnection {
 	public User getUser(){		
 		return this.user;	
 	}
-	public ArrayList<Movie> getMovie(){
+	public ArrayList<Movie> getMovieList(){
 		return this.movieList;
 	}
 	public ImageIcon getImageIcon(){

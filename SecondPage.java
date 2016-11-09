@@ -44,7 +44,6 @@ import java.awt.event.MouseEvent;
 
 public class SecondPage extends JFrame {
 	
-	Movie movie = new Movie();
 	private JPanel contentPane;
 	private JTextField textField;
 	private JLabel lblNewLabel;
@@ -68,8 +67,6 @@ public class SecondPage extends JFrame {
 	private JTextField textField_Genre;
 	private JTextField textField_Length;
 	
-	
-	private JButton button;
 
 	/**
 	 * Launch the application.
@@ -93,8 +90,6 @@ public class SecondPage extends JFrame {
 	 */
 	public SecondPage() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		int screenWidth = dim.width;
-		int screenHeight = dim.height;
 		
 		getSize();
 		setBounds(0, 0, dim.width, dim.height);
@@ -280,41 +275,60 @@ public class SecondPage extends JFrame {
 		);
 		panel.setLayout(gl_panel);
 
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MovieList frame = new MovieList();
+					contentPane.add(frame);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	
+	
 		
-		
-				/////////////////////// Internal Frame: List Of Movies
-		
-				MovieListed movieListed = new MovieListed();
-			
-				///////////////////// InternalFrame2: Log In
-				
-				Login login = new Login();
-				
-				//////////////////// Button actions
-				
-				//Search Button: To Movie List
-				 btnSearch.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-										
-							//Getting the User input from Text Fields
-							String inputTitle = textField_Title.getText(); //textField_Title.getText();
-							String inputYear = "2000"; //Integer.parseInt(0 + textField_Year.getText()); //there is "0 +" because cannot change nothing to integer
-							String inputGenre = textField_Genre.getText();
-							String inputStudio = textField_Studio.getText();
-							String inputLanguage = textField_Language.getText();//textField_Language.getText();
-							double inputRating = 0; //Integer.parseInt(textField_Rating.getText());
-							String intputActor = textField_Actor.getText();
-							String inputAgerestriction =  textField_AgeRes.getText();
-							String inputDirector = textField_Director.getText();
-							String inputRuntime = textField_Length.getText();;
+	//Search Button: To Movie List
+	 btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 							
-							// Using the user input for searching movies
-							Movie input = new Movie(0, inputTitle, inputRuntime, inputLanguage, inputYear, inputRating, inputDirector, inputStudio, inputAgerestriction /*, inputGenre, intputActor*/);
-						
-							//connecting to DBConnection and SearchQuery
-							
-						}				 
-					});
+				//Getting the User input from Text Fields
+				String inputTitle = textField_Title.getText(); 
+				String inputYear = textField_Year.getText(); //there is "0 +" because cannot change nothing to integer
+				String inputGenre = textField_Genre.getText();
+				String inputStudio = textField_Studio.getText();
+				String inputLanguage = textField_Language.getText();
+				String inputRating = textField_Rating.getText();
+				String intputActor = textField_Actor.getText();
+				String inputAgerestriction =  textField_AgeRes.getText();
+				String inputDirector = textField_Director.getText();
+				String inputRuntime = textField_Length.getText();
+				
+				String [] input = new String [10];
+				input[0] = inputTitle;
+				input[1] = inputYear;
+				input[2] = inputGenre;
+				input[3] = inputStudio;
+				input[4] = inputLanguage;
+				input[5] = inputRating;
+				input[6] = intputActor;
+				input[7] = inputAgerestriction;
+				input[8] = inputDirector;
+				input[9] = inputRuntime;
+				
+				//connecting to SearchQuery
+				SearchQuery searchQuery = new SearchQuery(input);
+				String query = searchQuery.getQuery();
+				
+				//connecting to DBConnection
+				DBConnection dBConnection = new DBConnection(query, "Movie"); 
+				ArrayList<Movie> movies= dBConnection.getMovieList();
+				
+				// connecting the list of movies and creating a new interface with searched movies
+				MovieList movieList = new MovieList(movies);
+			}				 
+		});
 				
 				 }
 }

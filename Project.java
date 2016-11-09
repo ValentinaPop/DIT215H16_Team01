@@ -32,24 +32,9 @@ import javax.swing.JMenuItem;
 
 public class Project {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField txtTrailerPark;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Project window = new Project();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
