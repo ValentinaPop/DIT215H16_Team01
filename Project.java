@@ -65,10 +65,6 @@ public class Project {
 		
 		
 		JButton icon_button = new JButton("icon_button");
-		icon_button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		icon_button.setVerticalAlignment(SwingConstants.CENTER);
 		icon_button.setBorderPainted(false);
 		icon_button.setContentAreaFilled(false);
@@ -107,7 +103,16 @@ public class Project {
 		
 	LogIn.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			SecondPage.main(null); // change this to a logging page
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						Login frame = new Login();
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
 		}
 	});
 		

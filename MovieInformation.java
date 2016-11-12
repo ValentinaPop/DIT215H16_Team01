@@ -44,14 +44,14 @@ public class MovieInformation extends JInternalFrame {
 	 * Launch the application.
 	 */
 	
-	public MovieInformation() {
+	public MovieInformation(Movie movie) {
 		
 		getContentPane().setBackground(new Color(253, 253, 253));
 		setBounds(100, 100, 700, 500);
 		getContentPane().setLayout(null);
 		
 		photoLabel = new JLabel("New label");
-		photoLabel.setIcon(new ImageIcon("C:\\Users\\Elaine\\Desktop\\HT16\\Project - Programming\\Movie covers\\Interstellar.jpg"));
+		photoLabel.setIcon(movie.getCoverPhoto());
 		photoLabel.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
 		photoLabel.setBackground(new Color(128, 0, 0));
 		photoLabel.setBounds(27, 76, 211, 273);

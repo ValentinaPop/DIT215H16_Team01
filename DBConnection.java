@@ -17,47 +17,56 @@ public class DBConnection {
 	private User user;
 	private ArrayList<Movie> movieList;
 	private ImageIcon displayedImage;
-	private ResultSet rs;
+	private String info;
 	
-	public DBConnection(String sqlStm, String type){
+	public DBConnection(String sqlStmt, String type){
 		
 			try {
 				Connection conn = DriverManager.getConnection(URL, USER, PASSWORD) ;
-				Statement stm = conn.createStatement() ;
+				Statement stmt = conn.createStatement() ;
 									
-						ResultSet rs = stm.executeQuery(sqlStm) ;
+						if (type.equals("Update")){
+							stmt.executeUpdate(sqlStmt);
+						}
 						
-						if (type.equals("User")){
-							while ( rs.next() ) {
-						user = (new User(rs.getInt("USER_ID"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("EMAIL"),rs.getBoolean("ADMINISTRATOR")));		
+						else if (type.equals("Get")) {
+							info = stmt.executeUpdate(sqlStmt) + "";
+						}
+						else{
+							
+							ResultSet rs = stmt.executeQuery(sqlStmt) ;
+							if (type.equals("User")){
+								while ( rs.next() ) {
+									user = (new User(rs.getInt("USER_ID"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("EMAIL"),rs.getBoolean("ADMINISTRATOR")));		
+								}
 							}
-						} 
-						else if(type.equals("Movie")){
-							while ( rs.next() ) {
+							else if(type.equals("Movie")){
+								while ( rs.next() ) {
 								
-								byte[] picture = rs.getBytes("Picture");
-								ImageIcon iconImage = new ImageIcon(picture);
-								Image image = iconImage.getImage();
-								Image image2 = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-								ImageIcon coverPhoto = new ImageIcon(image2);
+									byte[] picture = rs.getBytes("Picture");
+									ImageIcon iconImage = new ImageIcon(picture);
+									Image image = iconImage.getImage();
+									Image image2 = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+									ImageIcon coverPhoto = new ImageIcon(image2);
 								
-								movieList.add( new Movie(rs.getInt("Id"), rs.getString("Title"), coverPhoto, rs.getString("Length"), rs.getString("Language"),
+									movieList.add( new Movie(rs.getInt("Id"), rs.getString("Title"), coverPhoto, rs.getString("Length"), rs.getString("Language"),
 										rs.getDate("Release"), rs.getString("Description of the movie"), rs.getDouble("Rate"), rs.getString("Director"),
 										rs.getString("Studio"), rs.getString("Age restriction"))) ;
+							}	
 							}
-						}
-						else if (type.equals("Image")){
-							while ( rs.next() ) {
-						}
+							else if (type.equals("Image")){
+								while ( rs.next() ) {
 								
-								byte[] picture = rs.getBytes("Image");
+									byte[] picture = rs.getBytes("Image");
 								ImageIcon iconImage = new ImageIcon(picture);
 								Image image1 = iconImage.getImage();
 								Image image2 = image1.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 								displayedImage = new ImageIcon(image2);
+								}
 						}
 						
 					}
+			}
 			
 			catch ( SQLException ex ) {
 				ex.printStackTrace() ;
@@ -67,13 +76,14 @@ public class DBConnection {
 	public User getUser(){		
 		return this.user;	
 	}
-	public ArrayList<Movie> getMovieList(){
+	public ArrayList<Movie> getMovie(){
 		return this.movieList;
+	}
+	public String getInfo(){
+		return info;
 	}
 	public ImageIcon getImageIcon(){
 		return displayedImage;
 	}
 
 }
-
-

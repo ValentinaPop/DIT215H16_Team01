@@ -274,13 +274,38 @@ public class SecondPage extends JFrame {
 					.addContainerGap(643, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
+		
+		
+		//Menu in second page (if user, if administer or if visitor)
+		
+		int n = 1; // just for testing if these work, later when we figure out how to identify user, we can change also the if statements
+		if (n == 1) { //if user, how to identify? with user objects? Do we do visitor object for visitors?
+			
+		}
+		
+		else if (n == 2) { //if administer, how to identify? with user objects? Do we do visitor object for visitors?
+			MenuAdm frame = new MenuAdm();
+			frame.setVisible(true);
+		}
+		
+		else { //if just visitor
+			MenuNoUser frame = new MenuNoUser();
+			frame.setVisible(true);
+		}
+ 		
+		
+		//Connection to the Database to be able to get for example most popular movies in the window as soon as user opens the SecondPage (so that it is not an empty window)
+		DBConnection dBConnection = new DBConnection("Select * from TrailerPark", "Movie"); //Here we can decide if we want all movies or most popular or newest ones
+		ArrayList<Movie> mostPopular = dBConnection.getMovie();
 
+		//Running the MovieListPage for getting the actual window opened
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MovieList frame = new MovieList();
-					contentPane.add(frame);
+					MovieList frame = new MovieList(mostPopular);
 					frame.setVisible(true);
+					contentPane.add(frame);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -288,8 +313,8 @@ public class SecondPage extends JFrame {
 		});
 	
 	
-		
-	//Search Button: To Movie List
+	//Action for Search-Button	
+	//Search Button: According to users input it will open the MovieList with users information
 	 btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 							
@@ -305,6 +330,7 @@ public class SecondPage extends JFrame {
 				String inputDirector = textField_Director.getText();
 				String inputRuntime = textField_Length.getText();
 				
+				//Using the array for sending to information to SearchQuery where the query will be completed
 				String [] input = new String [10];
 				input[0] = inputTitle;
 				input[1] = inputYear;
@@ -317,16 +343,17 @@ public class SecondPage extends JFrame {
 				input[8] = inputDirector;
 				input[9] = inputRuntime;
 				
-				//connecting to SearchQuery
+				//connecting to SearchQuery and gettinr the query with users input
 				SearchQuery searchQuery = new SearchQuery(input);
 				String query = searchQuery.getQuery();
 				
 				//connecting to DBConnection
 				DBConnection dBConnection = new DBConnection(query, "Movie"); 
-				ArrayList<Movie> movies= dBConnection.getMovieList();
+				ArrayList<Movie> movies = dBConnection.getMovie();
 				
 				// connecting the list of movies and creating a new interface with searched movies
 				MovieList movieList = new MovieList(movies);
+				
 			}				 
 		});
 				

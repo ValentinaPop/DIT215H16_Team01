@@ -13,43 +13,40 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class RatingStars extends JInternalFrame {
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RatingStars frame = new RatingStars();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	Movie movie;
+	
+	
+	//with this, rating star will be added to movie information
+	//RatingStars frame = new RatingStars(Movie);
+	//frame.setVisible(true);
+	
+	//x 27, y 76, width 211, height 273
+	//
+		
 
 	/**
 	 * Create the frame.
 	 */
-	public RatingStars() {
+	public RatingStars(Movie movie) {
+		this.movie = movie;
+		
+		String [] queryArray = new String [4];
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
-		
-		Movie movie = new Movie();
 		
 		// Rating Star1
 		JLabel star1 = new JLabel("");
 		star1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//add 1 to Sum 
-				//add 1 to Amount
-				//add NewSum / NewAmount = Average
+				//Updating new rating information to database
+				String addSum = "update Rating set Sum = Sum + 1 where Id =" + movie.getId();  //add 1 to sum of ratings
+				String addAmount = "update Rating set Amount = Amount + 1 where Id =" + movie.getId(); //add 1 to amount of rates
+				String[]queries = new String[]{addSum, addAmount};
+				updateAverage(queries);
 			}
 		});
-		star1.setBounds(72, 107, 22, 16);
+		star1.setBounds(27, 349, 22, 16);
 		
 		BufferedImage img1=null;
 		File file1;
@@ -83,13 +80,14 @@ public class RatingStars extends JInternalFrame {
 		star2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//add 2 to Sum 
-				//add 1 to Amount
-				//add NewSum / NewAmount = Average
+				//Updating new rating information to database
+				String addSum = "update Rating set Sum = Sum + 2 where Id =" + movie.getId();  //add 2 to sum of ratings
+				String addAmount = "update Rating set Amount = Amount + 1 where Id =" + movie.getId(); //add 1 to amount of rates
+				String[]queries = new String[]{addSum, addAmount};
+				updateAverage(queries);
 			}
 		});
-		
-		star2.setBounds(107, 107, 22, 16);
+		star2.setBounds(50, 349, 22, 16);
 		
 		BufferedImage img2=null;
 		File file2;
@@ -124,13 +122,15 @@ public class RatingStars extends JInternalFrame {
 				star3.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
-						//add 3 to Sum 
-						//add 1 to Amount
-						//add NewSum / NewAmount = Average
+						//Updating new rating information to database
+						String addSum = "update Rating set Sum = Sum + 3 where Id =" + movie.getId();  //add 3 to sum of ratings
+						String addAmount = "update Rating set Amount = Amount + 1 where Id =" + movie.getId(); //add 1 to amount of rates
+						String[]queries = new String[]{addSum, addAmount};
+						updateAverage(queries);
 					}
 				});
 				
-				star3.setBounds(142, 107, 22, 16);
+				star3.setBounds(73, 349, 22, 16);
 				
 				BufferedImage img3=null;
 				File file3;
@@ -163,13 +163,15 @@ public class RatingStars extends JInternalFrame {
 				star4.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
-						//add 4 to Sum 
-						//add 1 to Amount
-						//add NewSum / NewAmount = Average
+						//Updating new rating information to database
+						String addSum = "update Rating set Sum = Sum + 4 where Id =" + movie.getId();  //add 4 to sum of ratings
+						String addAmount = "update Rating set Amount = Amount + 1 where Id =" + movie.getId(); //add 1 to amount of rates
+						String[]queries = new String[]{addSum, addAmount};
+						updateAverage(queries);
 					}
 				});
 				
-				star4.setBounds(177, 107, 22, 16);
+				star4.setBounds(96, 349, 22, 16);
 				
 				BufferedImage img4=null;
 				File file4;
@@ -202,12 +204,14 @@ public class RatingStars extends JInternalFrame {
 				star5.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
-						//add 5 to Sum 
-						//add 1 to Amount
-						//add NewSum / NewAmount = Average
+						//Updating new rating information to database
+						String addSum = "update Rating set Sum = Sum + 5 where Id =" + movie.getId();  //add 5 to sum of ratings
+						String addAmount = "update Rating set Amount = Amount + 1 where Id =" + movie.getId(); //add 1 to amount of rates
+						String[]queries = new String[]{addSum, addAmount};
+						updateAverage(queries);
 					}
 				});
-				star5.setBounds(212, 107, 22, 16);
+				star5.setBounds(119, 349, 22, 16);
 				
 				BufferedImage img5=null;
 				File file5;
@@ -234,5 +238,23 @@ public class RatingStars extends JInternalFrame {
 				ImageIcon imgicn5 = new ImageIcon(img5.getScaledInstance(star5.getWidth(), star5.getHeight(), 0));
 				star5.setIcon(imgicn5);		
 				getContentPane().add(star5);
+	}
+	
+	public void updateAverage(String[]query){
+		DBConnection dBConnection1 = new DBConnection("Update", query[0]); //update the new sum
+		DBConnection dBConnection2 = new DBConnection("Update", query[1]); //update the new amount
+		
+		//get new sum and new amount of rating to be able to count the new average
+		DBConnection dBConnection3 = new DBConnection("Get", "Select Sum from Rating where id =" + movie.getId()); // getting a updated sum
+		String getSum = dBConnection3.getInfo(); //get the new
+		
+		DBConnection dBConnection4 = new DBConnection("Get", "Select Amount from Rating where id =" + movie.getId()); // getting a updated amount		
+		String getAmount = dBConnection4.getInfo(); //get the new Amount
+		
+		//Update the new average
+		int newAverage = Integer.parseInt(getSum) / Integer.parseInt(getAmount) ; //Count the new average
+		DBConnection dBConnection5 = new DBConnection("Update", "update Rating set Average = newAverage where Id =" + this.movie.getId() ); // update the new Average
+		
+		//UpdateRatingStars to window (add stars or delete stars), how?
 	}
 }

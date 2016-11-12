@@ -24,8 +24,8 @@ public class Movie {
 		//Default constructor
 		public Movie(){
 			this.id = 0;
-			this.title = "";
-			//this.coverPhoto = coverPhoto;
+			this.title = "Wau";
+			this.coverPhoto = coverPhoto;
 			this.runtime = "";
 			this.language = "";
 			//this.releaseDate;
@@ -39,7 +39,7 @@ public class Movie {
 		//Constructor with title for "No movies found"
 		public Movie(String title){
 			this.title = title;
-			//this.coverPhoto = coverPhoto;
+			this.coverPhoto = coverPhoto;
 			this.runtime = "";
 			this.language = language;
 			//this.releaseDate;
@@ -71,13 +71,10 @@ public class Movie {
 			return title;
 		}
 		
-		//public ImageIcon getCoverPhoto(){
-		//	return this.coverPhoto;
-		//}
+		public ImageIcon getCoverPhoto(){
+			return this.coverPhoto;
+		}
 		
-		/*public ImageIcon getcoverPhoto(){
-			return coverPhoto;
-		}*/
 		public String getRuntime(){
 			return runtime;
 		}
