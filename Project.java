@@ -1,4 +1,5 @@
 package connection;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,11 +13,12 @@ import java.awt.Toolkit;
 import java.awt.Label;
 import java.awt.Rectangle;
 import javax.swing.JMenuBar;
-//import com.jgoodies.forms.factories.DefaultComponentFactory;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.AncestorEvent;
 import java.awt.Component;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -24,17 +26,37 @@ import javax.swing.JToolBar;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JMenuItem;
 
 public class Project {
 
-	public JFrame frame;
+	private JFrame frame;
 	private JTextField txtTrailerPark;
 
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Project window = new Project();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the application.
@@ -42,18 +64,17 @@ public class Project {
 	public Project() {
 		initialize();
 	}
-	
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		// Get the screen dimension
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();  
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		int screenWidth = dim.width;
 		int screenHeight = dim.height;
-		String [] action = new String [1]; // To log in or list
-		
-		// Frame(main)
+
+		// Frame( main)
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.getSize();
@@ -61,86 +82,85 @@ public class Project {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
-		
-		
-		
-		JButton icon_button = new JButton("icon_button");
-		icon_button.setVerticalAlignment(SwingConstants.CENTER);
-		icon_button.setBorderPainted(false);
-		icon_button.setContentAreaFilled(false);
-		icon_button.setFocusPainted(false);
-		icon_button.setOpaque(false);		
-		icon_button.setIcon(new ImageIcon("C:\\Users\\Omistaja\\Downloads\\TrailerPark\\14876016_1153238348097727_916387429_o.png"));
-		icon_button.setBounds(842, 261, 311, 330);
-		
-		icon_button.addMouseListener(new MouseAdapter(){
-		public void mouseEntered(MouseEvent evt){
-			// mouse over the button
-			icon_button.setIcon(new ImageIcon("C:\\Users\\Omistaja\\Downloads\\TrailerPark\\14922986_1153238351431060_1537298087_o.png"));
-		}
-		
-		public void mouseExited(MouseEvent evt){
-			// mouse not over the button
-			icon_button.setIcon(new ImageIcon("C:\\Users\\Omistaja\\Downloads\\TrailerPark\\14876016_1153238348097727_916387429_o.png"));
-		}
-		
-			// mouseClicked 
+
+		JButton play_button = new JButton("play_button");
+		play_button.setVerticalAlignment(SwingConstants.CENTER);
+		play_button.setBorderPainted(false);
+		play_button.setContentAreaFilled(false);
+		play_button.setFocusPainted(false);
+		play_button.setOpaque(false);
+		ImageIcon img = new ImageIcon(getClass().getResource("/resources/mouseOut.png"));
+		play_button.setIcon(img);
+		play_button.setBounds(859, 301, 261, 287);
+
+		// mouse over the play button
+		play_button.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent evt) {
+				ImageIcon img = new ImageIcon(getClass().getResource("/resources/mouseOn.png"));
+				play_button.setIcon(img);
+				
+			}
+
+			// mouse not over the play button
+			public void mouseExited(MouseEvent evt) {
+				ImageIcon img = new ImageIcon(getClass().getResource("/resources/mouseOut.png"));
+				play_button.setIcon(img);
+				
+			}
+
+			// Play_button mouseClicked ==> opens the 2nd Page
 			public void mouseClicked(MouseEvent e) {
 				SecondPage.main(null);
 			}
 		});
-		
+
+		// -------------- Log In Button--------------------------------
 		JButton LogIn = new JButton("");
-		
-			
+		LogIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SecondPage.main(null); // change this to a loggin page
+			}
+		});
 		LogIn.setBorderPainted(false);
 		LogIn.setContentAreaFilled(false);
 		LogIn.setFocusPainted(false);
-		LogIn.setOpaque(false);	
-		LogIn.setIcon(new ImageIcon("C:\\Users\\Omistaja\\Downloads\\TrailerPark\\14886335_1153238338097728_590646191_n.png"));
+		LogIn.setOpaque(false);
+		ImageIcon user = new ImageIcon(getClass().getResource("/resources/User.png"));
+		LogIn.setIcon(user);
 		LogIn.setBounds(980, 22, 72, 57);
+		
+		// adding buttons to frame
 		frame.getContentPane().add(LogIn);
-		
-	LogIn.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						Login frame = new Login();
-						frame.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-		}
-	});
-		
-		
-		frame.getContentPane().add(icon_button);
-		
+		frame.getContentPane().add(play_button);
+
 		JLabel lblNewLabel_1 = new JLabel("Log In");
 		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 15));
 		lblNewLabel_1.setForeground(new Color(128, 0, 0));
-		lblNewLabel_1.setBounds(990, 76, 72, 57);
+		lblNewLabel_1.setBounds(989, 79, 72, 16);
 		frame.getContentPane().add(lblNewLabel_1);
-		
-		JLabel lblNewLabel = new JLabel("Trailer Park");
-		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 60));
-		lblNewLabel.setForeground(new Color(128, 0, 0));
-		lblNewLabel.setBounds(473, 175, 384, 57);
+
+		JLabel lblNewLabel = new JLabel();
+		lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/resources/logoTrailerPark.png")));
+		//lblNewLabel.add(lblNewLabel, new ImageIcon(logoTrailerPark));
+		//lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 60));
+		//lblNewLabel.setForeground(new Color(128, 0, 0));
+		lblNewLabel.setBounds(359, 96, 512, 152);
 		frame.getContentPane().add(lblNewLabel);
-		
-		JLabel inner_frame = new JLabel("inner_frame");
-		inner_frame.setIcon(new ImageIcon("C:\\Users\\Omistaja\\Downloads\\TrailerPark\\14858692_1153238344764394_580171547_o.jpg"));
-		inner_frame.setBounds(115, -40, 1025, 584);
-		frame.getContentPane().add(inner_frame);
-		
+
+		// ------------------- Background image (the theater)------------------------------------------
 		JLabel background = new JLabel("background");
-		background.setIcon(new ImageIcon("C:\\Users\\Omistaja\\Downloads\\TrailerPark\\14894596_1153238354764393_1284257927_o.jpg"));
+		// implement images from the package
+		InputStream umg3 = getClass().getClassLoader().getResourceAsStream("resources/Theater.jpg");
+		BufferedImage img3 = null;
+		try {
+			img3 = ImageIO.read(umg3);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		img3.getScaledInstance(background.WIDTH, background.HEIGHT, Image.SCALE_SMOOTH);
+		background.setIcon(new ImageIcon(img3));
 		background.setBounds(-238, -64, 1557, 800);
 		frame.getContentPane().add(background);
-		
-	
+
 	}
 }
