@@ -166,6 +166,28 @@ public class Table extends JPanel {
  
         //Add the scroll pane to this panel.
         add(scrollPane);
+
+ /////hide column ID
+        TableColumn idClmn= table.getColumn("Id");
+        idClmn.setMaxWidth(0);
+        idClmn.setMinWidth(0);
+        idClmn.setPreferredWidth(0);
+        
+       ///// hide column Release
+        TableColumn idClmn1= table.getColumn("Release");
+        idClmn1.setMaxWidth(0);
+        idClmn1.setMinWidth(0);
+        idClmn1.setPreferredWidth(0);
+        
+        ///hide column Length
+        TableColumn idClmn2= table.getColumn("Length");
+        idClmn2.setMaxWidth(0);
+        idClmn2.setMinWidth(0);
+        idClmn2.setPreferredWidth(0);
+        
+ 
+
+
     }
  
     *//**
@@ -199,10 +221,8 @@ public class Table extends JPanel {
     }
     
 	public void FillTable(JTable table, String Query) {
-		String[] columnNames = {"Picture",
-                "Title",
-                "Year",
-                "Rating"};
+		String[] columnNames =  {"Id","Title",  "Length","Director","Studio","Release","Language","Age restriction","Description","Picture",
+				"Comment","Rate"}; //more columns
 
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setColumnIdentifiers(columnNames);
